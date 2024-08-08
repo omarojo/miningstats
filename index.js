@@ -110,18 +110,23 @@ app.route("/workers/").get(function (req, res, next) {
       var stats = JSON.parse(statsBody);
       var onlineRigs = [];
       var offlineRigs = [];
+      var offlineRigsString = "";
       stats.data.zhash.workers.forEach((r) => {
         if (r.online == true) {
           onlineRigs.push(r.name);
         }
       });
       offlineRigs = rigsReference.filter((item) => !onlineRigs.includes(item));
-
+      offlineRigs.forEach((r) => {
+        offlineRigsString = offlineRigsString.concat(r + ", ");
+      });
+      console.log(offlineRigsString);
       var workers = {
         onlineCount: onlineRigs.length,
         onlineRigs: onlineRigs,
         offlineRigs: offlineRigs,
         offlineCount: offlineRigs.length,
+        offlineRingsString: offlineRigsString,
       };
       lastFetchedData = workers;
       //stats.data.zhash.workers
