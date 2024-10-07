@@ -1,5 +1,6 @@
 /*********************************/
 /* MODULES DEPENDENCIES */
+console.log("Server Running :::");
 var request = require("request"); //Used to make POSTs GETs requests internally
 
 // SERVER variables
@@ -83,7 +84,7 @@ function differenceBetweenDates(prevDate) {
 // ******************************************
 app.route("/stats/").get(function (req, res, next) {
   request(
-    "https://api.unminable.com/v4/account/8cb74bda-b7a2-4fdc-a624-4d54940719ca/stats",
+    "https://api.unminable.com/v5/account/8cb74bda-b7a2-4fdc-a624-4d54940719ca/stats",
     function (error, response, statsBody) {
       //If elapsed time between now and last request is not higher than timeRequestLimit.. then send back the old result.
       var elapsedTimeSinceLastRequest = differenceBetweenDates(previousDate);
@@ -99,7 +100,7 @@ app.route("/stats/").get(function (req, res, next) {
 });
 app.route("/workers/").get(function (req, res, next) {
   request(
-    "https://api.unminable.com/v4/account/8cb74bda-b7a2-4fdc-a624-4d54940719ca/workers",
+    "https://api.unminable.com/v5/account/8cb74bda-b7a2-4fdc-a624-4d54940719ca/workers",
     function (error, response, statsBody) {
       //If elapsed time between now and last request is not higher than timeRequestLimit.. then send back the old result.
       var elapsedTimeSinceLastRequest = differenceBetweenDates(previousDate);
@@ -112,6 +113,11 @@ app.route("/workers/").get(function (req, res, next) {
       var offlineRigs = [];
       var offlineRigsString = "";
       stats.data.zhash.workers.forEach((r) => {
+        if (r.online == true) {
+          onlineRigs.push(r.name);
+        }
+      });
+      stats.data.xelishash.workers.forEach((r) => {
         if (r.online == true) {
           onlineRigs.push(r.name);
         }
