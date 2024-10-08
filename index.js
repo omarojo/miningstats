@@ -122,6 +122,11 @@ app.route("/workers/").get(function (req, res, next) {
           onlineRigs.push(r.name);
         }
       });
+      stats.data.octopus.workers.forEach((r) => {
+        if (r.online == true) {
+          onlineRigs.push(r.name);
+        }
+      });
       offlineRigs = rigsReference.filter((item) => !onlineRigs.includes(item));
       offlineRigs.forEach((r) => {
         offlineRigsString = offlineRigsString.concat(r + ", ");
