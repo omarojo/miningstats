@@ -44,7 +44,7 @@ let rigsReference = [
   // "Rig10",
   "Rig11",
   "Rig12",
-  // "Rig13",
+  "Rig13",
   "Rig14",
   "Rig15",
   "Rig16",
@@ -123,6 +123,11 @@ app.route("/workers/").get(function (req, res, next) {
         }
       });
       stats.data.octopus.workers.forEach((r) => {
+        if (r.online == true) {
+          onlineRigs.push(r.name);
+        }
+      });
+      stats.data.zelhash.workers.forEach((r) => {
         if (r.online == true) {
           onlineRigs.push(r.name);
         }
