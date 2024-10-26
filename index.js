@@ -38,7 +38,7 @@ let rigsReference = [
   // "Rig4",
   "Rig5",
   "Rig6",
-  // "Rig7",
+  "Rig7",
   "Rig8",
   "Rig9",
   // "Rig10",
